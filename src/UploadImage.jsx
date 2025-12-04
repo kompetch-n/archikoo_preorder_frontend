@@ -233,6 +233,21 @@ export default function UploadImage() {
                         onChange={(e) => setForm({ ...form, quantity: e.target.value })}
                     />
 
+                    {/* QR Code สำหรับสแกนจ่าย */}
+                    <div className="text-center mb-6">
+                        <p className="font-semibold text-blue-700 mb-2">
+                            📲 สแกน QR เพื่อชำระเงินก่อนอัปโหลดสลิป
+                        </p>
+                        <img
+                            src="qr_payment.JPEG" // <-- ใส่ path ของ QR Code ของคุณ
+                            alt="QR Payment"
+                            className="mx-auto rounded-xl shadow-lg border border-blue-200 w-full max-w-xs object-contain"
+                            // style={{
+                            //     aspectRatio: "1 / 1" // รักษาอัตราส่วนเป็นสี่เหลี่ยมจัตุรัส
+                            // }}
+                        />
+                    </div>
+
                     {/* Upload Slip */}
                     <div>
                         <label className="block font-semibold text-blue-700 mb-2">
