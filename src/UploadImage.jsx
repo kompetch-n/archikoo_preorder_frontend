@@ -82,7 +82,7 @@ export default function UploadImage() {
         formData.append("file", image);
 
         const res = await axios.post(
-            "http://localhost:8000/upload-image",
+            "https://archikoo-preorder-backend.vercel.app/upload-image",
             formData,
             { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -107,7 +107,7 @@ export default function UploadImage() {
         formData.append("tracking_number", form.tracking);
         formData.append("status", form.status);
 
-        await axios.post("http://localhost:8000/create-order", formData);
+        await axios.post("https://archikoo-preorder-backend.vercel.app/create-order", formData);
 
         alert("บันทึกข้อมูลสำเร็จ!");
     };
