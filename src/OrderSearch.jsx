@@ -32,36 +32,40 @@ export default function OrderSearch() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-blue-100 to-cyan-100 p-6 flex justify-center items-start">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-blue-100 to-cyan-100 p-4 flex justify-center">
 
-      <div className="w-full max-w-2xl bg-white/70 backdrop-blur-xl shadow-2xl rounded-3xl p-10 border border-white/30">
+      <div className="w-full max-w-xl bg-white/80 backdrop-blur-xl shadow-2xl rounded-3xl p-6 border border-white/30 mt-4 mb-10">
 
         {/* Back button */}
         <button
           onClick={() => navigate("/")}
-          className="mb-6 text-slate-600 font-semibold flex items-center gap-2 hover:text-slate-900 transition"
+          className="mb-4 text-slate-600 font-semibold flex items-center gap-2 hover:text-slate-900 transition"
         >
           <span className="text-xl">←</span> กลับไปหน้าการสั่งซื้อ
         </button>
 
         {/* Header */}
-        <h1 className="text-center text-4xl font-extrabold text-slate-800 mb-8 drop-shadow-sm">
+        <h1 className="text-center text-3xl md:text-4xl font-extrabold text-slate-800 mb-6 drop-shadow-sm">
           ตรวจสอบคำสั่งซื้อ
         </h1>
 
-        {/* Search box */}
-        <div className="flex gap-3 mb-6">
+        {/* Search box - mobile friendly */}
+        <div className="flex flex-col md:flex-row gap-3 mb-6">
           <input
             type="text"
             placeholder="พิมพ์ชื่อ หรือ เบอร์โทร..."
-            className="flex-1 rounded-2xl p-4 bg-white/60 backdrop-blur-md border border-slate-200 text-lg shadow-inner focus:ring-2 focus:ring-blue-400 outline-none transition"
+            className="w-full rounded-2xl p-4 bg-white/70 backdrop-blur-md 
+              border border-slate-200 text-lg shadow-inner 
+              focus:ring-2 focus:ring-blue-400 outline-none transition"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
 
           <button
             onClick={handleSearch}
-            className="bg-blue-600 px-7 py-3 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-blue-700 active:scale-95 transition"
+            className="w-full md:w-auto bg-blue-600 px-7 py-3 text-white 
+              text-lg font-semibold rounded-2xl shadow-lg 
+              hover:bg-blue-700 active:scale-95 transition"
           >
             ค้นหา
           </button>
@@ -82,11 +86,13 @@ export default function OrderSearch() {
         )}
 
         {/* Result list */}
-        <div className="space-y-6">
+        <div className="space-y-5">
           {orders.map((order) => (
             <div
               key={order._id}
-              className="border border-slate-200 rounded-3xl p-6 bg-white shadow-md hover:shadow-xl transition transform hover:-translate-y-1 hover:border-blue-300"
+              className="border border-slate-200 rounded-2xl p-5 bg-white 
+                shadow-md hover:shadow-xl transition transform 
+                hover:-translate-y-1 hover:border-blue-300"
             >
               <p className="text-xl font-semibold text-slate-800">
                 {order.name}
@@ -101,7 +107,7 @@ export default function OrderSearch() {
                 <span className="text-blue-600">{order.status}</span>
               </p>
 
-              {order.tracking_number && order.tracking_number.trim() !== "" ? (
+              {order.tracking_number ? (
                 <p className="text-green-600 text-lg mt-1">
                   <b>Tracking:</b> {order.tracking_number}
                 </p>
