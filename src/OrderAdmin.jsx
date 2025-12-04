@@ -77,6 +77,16 @@ export default function OrderAdmin() {
                             <p><b>ที่อยู่:</b> {order.address}</p>
                             <p><b>จำนวน:</b> {order.amount}</p>
 
+                            {/* ⭐ เพิ่มฟิลด์ "ที่อยู่ในการจัดส่ง" รวมชื่อ + เบอร์ + ที่อยู่ */}
+                            <div className="mt-3 p-3 bg-blue-50 rounded-2xl border border-blue-200">
+                                <p className="font-semibold text-blue-800">📦 ที่อยู่ในการจัดส่ง</p>
+                                <p className="text-slate-700 mt-1">
+                                    {order.name} {order.phone}
+                                    <br />
+                                    {order.address}
+                                </p>
+                            </div>
+
                             <p className="mt-2">
                                 <b>สถานะ:</b>{" "}
                                 <span className="text-blue-600">{order.status}</span>
@@ -105,6 +115,7 @@ export default function OrderAdmin() {
                                 </button>
                             </div>
                         </div>
+
 
                     ))}
                 </div>
