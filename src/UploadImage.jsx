@@ -172,7 +172,7 @@ export default function UploadImage() {
                     onChange={(e) => setForm({ ...form, quantity: e.target.value })}
                 />
 
-                <input
+                {/* <input
                     className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
                     placeholder="เลขพัสดุ"
                     value={form.tracking}
@@ -187,7 +187,7 @@ export default function UploadImage() {
                     <option>สั่งซื้อสำเร็จ</option>
                     <option>รอจัดส่ง</option>
                     <option>จัดส่งแล้ว</option>
-                </select>
+                </select> */}
 
                 <div>
                     <label className="block font-semibold text-gray-600 mb-2">
