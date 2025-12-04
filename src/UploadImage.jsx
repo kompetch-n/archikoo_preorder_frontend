@@ -94,7 +94,6 @@ export default function UploadImage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 🔥 ใส่ validation ตรงนี้ ก่อนสร้าง formData
         if (!form.quantity || Number(form.quantity) <= 0) {
             alert("กรุณากรอกจำนวนให้ถูกต้อง");
             return;
@@ -105,19 +104,19 @@ export default function UploadImage() {
             return;
         }
 
+        // 🔥 อัปโหลดรูปก่อนส่งข้อมูล
+        const uploadedImageUrl = await uploadImage();
+
         if (!uploadedImageUrl) {
             alert("กรุณาอัปโหลดรูปก่อน");
             return;
         }
 
-        // -------------------------------
-        // 🔥 สร้าง FormData หลังจาก validate แล้วเท่านั้น
-        // -------------------------------
         const formData = new FormData();
         formData.append("name", form.name);
         formData.append("address", form.address);
         formData.append("phone", form.phone);
-        formData.append("amount", form.quantity); // ไม่ต้อง Number()
+        formData.append("amount", form.quantity);
         formData.append("image_url", uploadedImageUrl);
         formData.append("tracking_number", form.tracking);
         formData.append("status", form.status);
@@ -135,7 +134,6 @@ export default function UploadImage() {
             alert("เกิดข้อผิดพลาด");
         }
     };
-
 
     return (
         <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-8">
