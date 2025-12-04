@@ -4,6 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 export default function UploadImage() {
     const navigate = useNavigate();
+
+    const resetForm = () => {
+        setForm({
+            name: "",
+            address: "",
+            phone: "",
+            quantity: "",
+            tracking: "",
+            status: "สั่งซื้อสำเร็จ",
+        });
+        setImage(null);
+        setPreview(null);
+        setUploadUrl("");
+    };
+
     const [form, setForm] = useState({
         name: "",
         address: "",
@@ -16,6 +31,9 @@ export default function UploadImage() {
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [uploadUrl, setUploadUrl] = useState("");
+    const [uploading, setUploading] = useState(false);
+    const [loading, setLoading] = useState(false);
+
 
     const compressImage = (file) => {
         return new Promise((resolve) => {
@@ -80,17 +98,28 @@ export default function UploadImage() {
     const uploadImage = async () => {
         if (!image) return alert("กรุณาเลือกรูปภาพก่อนอัปโหลด");
 
+        setUploading(true); // ▶️ เริ่มอัปโหลด
+
         const formData = new FormData();
         formData.append("file", image);
 
-        const res = await axios.post(
-            "https://archikoo-preorder-backend.vercel.app/upload-image",
-            formData,
-            { headers: { "Content-Type": "multipart/form-data" } }
-        );
+        try {
+            const res = await axios.post(
+                "https://archikoo-preorder-backend.vercel.app/upload-image",
+                formData,
+                { headers: { "Content-Type": "multipart/form-data" } }
+            );
 
-        setUploadUrl(res.data.url);
-        return res.data.url;
+            setUploadUrl(res.data.url);
+            return res.data.url;
+
+        } catch (err) {
+            alert("อัปโหลดรูปไม่สำเร็จ");
+            return null;
+
+        } finally {
+            setUploading(false); // ▶️ จบการอัปโหลด
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -106,11 +135,14 @@ export default function UploadImage() {
             return;
         }
 
-        // 🔥 อัปโหลดรูปก่อนส่งข้อมูล
+        setLoading(true); // ▶️ เริ่มส่งคำสั่งซื้อ
+
+        // อัปโหลดรูปก่อน
         const uploadedImageUrl = await uploadImage();
 
         if (!uploadedImageUrl) {
             alert("กรุณาอัปโหลดรูปก่อน");
+            setLoading(false); // ▶️ หยุดโหลดถ้าผิดพลาด
             return;
         }
 
@@ -131,11 +163,18 @@ export default function UploadImage() {
             );
 
             alert("บันทึกสำเร็จ");
+            resetForm();
+            window.scrollTo(0, 0);
+
         } catch (err) {
             console.error(err);
             alert("เกิดข้อผิดพลาด");
+
+        } finally {
+            setLoading(false); // ▶️ หยุดโหลด
         }
     };
+
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6 flex justify-center items-start">
@@ -217,10 +256,12 @@ export default function UploadImage() {
 
                     <button
                         onClick={handleSubmit}
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 rounded-xl shadow-lg hover:opacity-90 active:scale-95 transition"
+                        disabled={loading || uploading}
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 rounded-xl shadow-lg hover:opacity-90 active:scale-95 transition disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                        บันทึกลงระบบ
+                        {loading ? "กำลังส่งคำสั่งซื้อ..." : uploading ? "กำลังอัปโหลดรูป..." : "สั่งซื้อ"}
                     </button>
+
                 </div>
             </div>
         </div>
