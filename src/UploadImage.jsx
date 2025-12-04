@@ -107,7 +107,7 @@ export default function UploadImage() {
         formData.append("tracking_number", form.tracking);
         formData.append("status", form.status);
 
-        await axios.post("https://archikoo-preorder-backend.vercel.app/create-order", formData);
+        await axios.post("https://archikoo-preorder-backend.vercel.app/orders", formData);
 
         alert("บันทึกข้อมูลสำเร็จ!");
     };
