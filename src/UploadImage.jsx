@@ -191,7 +191,7 @@ export default function UploadImage() {
 
                 <div>
                     <label className="block font-semibold text-gray-600 mb-2">
-                        อัปโหลดรูปสินค้า
+                        อัปโหลดสลิป
                     </label>
                     <input
                         type="file"
