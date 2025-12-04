@@ -1,15 +1,21 @@
-import { useState } from 'react'
-import './App.css'
-import UploadImage from './UploadImage'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UploadImage from "./UploadImage";
+import OrderSearch from "./OrderSearch";
+import OrderAdmin from "./OrderAdmin";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <UploadImage />
-    </>
-  )
-}
+    <BrowserRouter>
+      <Routes>
 
-export default App
+        {/* หน้า upload */}
+        <Route path="/" element={<UploadImage />} />
+
+        <Route path="/search" element={<OrderSearch />} />
+
+        <Route path="/admin" element={<OrderAdmin/>} />
+
+      </Routes>
+    </BrowserRouter>
+  );
+}

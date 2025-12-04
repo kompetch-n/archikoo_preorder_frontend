@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadImage() {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         name: "",
         address: "",
@@ -136,85 +138,92 @@ export default function UploadImage() {
     };
 
     return (
-        <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">
-                สร้างคำสั่งซื้อใหม่
-            </h2>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6 flex justify-center items-start">
 
-            <div className="space-y-4">
+            <div className="w-full max-w-xl bg-white/90 backdrop-blur-lg shadow-2xl rounded-2xl p-8 border border-blue-100">
 
-                <input
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
-                    placeholder="ชื่อ"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                />
-
-                <textarea
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
-                    placeholder="ที่อยู่"
-                    value={form.address}
-                    onChange={(e) => setForm({ ...form, address: e.target.value })}
-                />
-
-                <input
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
-                    placeholder="เบอร์โทร"
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                />
-
-                <input
-                    type="number"
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
-                    placeholder="จำนวน"
-                    value={form.quantity}
-                    onChange={(e) => setForm({ ...form, quantity: e.target.value })}
-                />
-
-                {/* <input
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
-                    placeholder="เลขพัสดุ"
-                    value={form.tracking}
-                    onChange={(e) => setForm({ ...form, tracking: e.target.value })}
-                />
-
-                <select
-                    className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400"
-                    value={form.status}
-                    onChange={(e) => setForm({ ...form, status: e.target.value })}
-                >
-                    <option>สั่งซื้อสำเร็จ</option>
-                    <option>รอจัดส่ง</option>
-                    <option>จัดส่งแล้ว</option>
-                </select> */}
-
-                <div>
-                    <label className="block font-semibold text-gray-600 mb-2">
-                        อัปโหลดสลิป
-                    </label>
-                    <input
-                        type="file"
-                        className="w-full"
-                        onChange={handleFile}
+                {/* รูปตัวอย่างสินค้า */}
+                <div className="text-center mb-6">
+                    <img
+                        src="IMG_3664.png"
+                        alt="product-sample"
+                        className="w-full rounded-xl shadow-lg object-contain border border-blue-100"
                     />
-
-                    {preview && (
-                        <img
-                            src={preview}
-                            alt="preview"
-                            className="mt-3 rounded-lg shadow-md w-40"
-                        />
-                    )}
                 </div>
 
+                <h2 className="text-3xl font-bold text-blue-700 text-center mb-6">
+                    สร้างคำสั่งซื้อใหม่
+                </h2>
+
                 <button
-                    onClick={handleSubmit}
-                    className="w-full bg-blue-600 text-white p-3 rounded-lg shadow hover:bg-blue-700 transition"
+                    onClick={() => navigate("/search")}
+                    className="w-full mb-6 bg-green-600 text-white p-3 rounded-xl shadow hover:bg-green-700 transition"
                 >
-                    บันทึกลงระบบ
+                    ไปที่หน้าตรวจสอบการสั่งซื้อ
                 </button>
+
+                <div className="space-y-5">
+
+                    <input
+                        className="w-full border-blue-200 border rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                        placeholder="ชื่อ"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    />
+
+                    <textarea
+                        className="w-full border-blue-200 border rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                        placeholder="ที่อยู่"
+                        rows={3}
+                        value={form.address}
+                        onChange={(e) => setForm({ ...form, address: e.target.value })}
+                    />
+
+                    <input
+                        className="w-full border-blue-200 border rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                        placeholder="เบอร์โทร"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    />
+
+                    <input
+                        type="number"
+                        className="w-full border-blue-200 border rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                        placeholder="จำนวน"
+                        value={form.quantity}
+                        onChange={(e) => setForm({ ...form, quantity: e.target.value })}
+                    />
+
+                    {/* Upload Slip */}
+                    <div>
+                        <label className="block font-semibold text-blue-700 mb-2">
+                            อัปโหลดสลิป
+                        </label>
+
+                        <input
+                            type="file"
+                            className="w-full text-blue-600"
+                            onChange={handleFile}
+                        />
+
+                        {preview && (
+                            <img
+                                src={preview}
+                                alt="preview"
+                                className="mt-4 rounded-xl shadow-lg border border-blue-200 w-full object-contain"
+                            />
+                        )}
+                    </div>
+
+                    <button
+                        onClick={handleSubmit}
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 rounded-xl shadow-lg hover:opacity-90 active:scale-95 transition"
+                    >
+                        บันทึกลงระบบ
+                    </button>
+                </div>
             </div>
         </div>
     );
+
 }
