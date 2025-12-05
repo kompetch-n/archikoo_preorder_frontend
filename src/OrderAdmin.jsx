@@ -46,8 +46,15 @@ export default function OrderAdmin() {
     };
 
     const submitEdit = async () => {
+        // ถ้ามี tracking_number ให้เปลี่ยน status เป็น "จัดส่งแล้ว"
+        const updatedForm = { ...form };
+        if (updatedForm.tracking_number && updatedForm.tracking_number.trim() !== "") {
+            updatedForm.status = "จัดส่งแล้ว";
+        }
+
         const formData = new FormData();
-        Object.keys(form).forEach((key) => formData.append(key, form[key]));
+        Object.keys(updatedForm).forEach((key) => formData.append(key, updatedForm[key]));
+
         await axios.put(`${API}/orders/${editing}`, formData);
         setEditing(null);
         loadOrders();
@@ -161,7 +168,6 @@ export default function OrderAdmin() {
                                 >
                                     <option value="">เลือกสถานะ</option>
                                     <option value="สั่งซื้อสำเร็จ">สั่งซื้อสำเร็จ</option>
-                                    <option value="รอจัดส่ง">รอจัดส่ง</option>
                                     <option value="จัดส่งแล้ว">จัดส่งแล้ว</option>
                                 </select>
                             </div>

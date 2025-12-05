@@ -119,6 +119,10 @@ export default function OrderSearch() {
                                 <span className="text-blue-600">{order.status}</span>
                             </p>
 
+                            <p className="text-lg mt-1">
+                                <b>ที่อยู่:</b> {order.address}
+                            </p>
+
                             {order.tracking_number ? (
                                 <p className="text-green-600 text-lg mt-1">
                                     <b>Tracking:</b> {order.tracking_number}
