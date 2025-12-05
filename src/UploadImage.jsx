@@ -305,6 +305,11 @@ export default function UploadImage() {
                             alt="QR Payment"
                             className="mx-auto rounded-xl shadow-lg border border-blue-200 w-full max-w-xs object-contain"
                         />
+                        {/* ข้อความใต้ QR Code */}
+                        <p className="text-sm text-gray-700 mt-2 font-semibold">
+                            K-bank, Janpen B.<br />
+                            005-373-808-7
+                        </p>
                     </div>
 
 
