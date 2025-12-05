@@ -3,6 +3,7 @@ import UploadImage from "./UploadImage";
 import OrderSearch from "./OrderSearch";
 import OrderAdmin from "./OrderAdmin";
 import { useEffect } from "react";
+import PrintLayout from "./PrintLayout";
 
 // ฟังก์ชันป้องกันหน้า admin
 function ProtectedAdmin() {
@@ -31,6 +32,8 @@ export default function App() {
 
         {/* Protect admin page */}
         <Route path="/admin" element={<ProtectedAdmin />} />
+
+        <Route path="/print" element={<PrintLayout/>} />
 
       </Routes>
     </BrowserRouter>
